@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".ui.login.LoginActivity"
   >
 
 
@@ -27,7 +28,7 @@
         android:ems="10"
         android:hint="Enter your e-mail"
         android:inputType="textPersonName"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -42,7 +43,7 @@
         android:ems="10"
         android:hint="Enter your password"
         android:inputType="textPassword"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -77,13 +78,15 @@
         app:layout_constraintStart_toEndOf="@+id/sign_inBtn"></Button>
 
     <ProgressBar
-        android:id="@+id/pBar"
-        style="?android:attr/progressBarStyleHorizontal"
+        android:id="@+id/pbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="104dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="185dp" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"></ProgressBar>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
