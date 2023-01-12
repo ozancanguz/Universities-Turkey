@@ -3,7 +3,6 @@ package com.ozancanguz.universities_turkey.ui.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,8 +10,7 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.ozancanguz.universities_turkey.MainActivity
-import com.ozancanguz.universities_turkey.R
+import com.ozancanguz.universities_turkey.ui.main.MainActivity
 import com.ozancanguz.universities_turkey.databinding.ActivityLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -47,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
         val currentUser=auth.currentUser
         if(currentUser!=null){
             binding.pbar.visibility=View.VISIBLE
-            val intent=Intent(this,MainActivity::class.java)
+            val intent=Intent(this, MainActivity::class.java)
             startActivity(intent)
             binding.pbar.visibility=View.INVISIBLE
         }
@@ -96,7 +94,7 @@ class LoginActivity : AppCompatActivity() {
 
                 auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener {
 
-                    val intent= Intent(this,MainActivity::class.java)
+                    val intent= Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     binding.pbar.visibility= View.INVISIBLE
 

@@ -1,4 +1,4 @@
-package com.ozancanguz.universities_turkey
+package com.ozancanguz.universities_turkey.ui.main
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +9,7 @@ import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.ozancanguz.universities_turkey.databinding.ActivityLoginBinding
+import com.ozancanguz.universities_turkey.R
 import com.ozancanguz.universities_turkey.databinding.ActivityMainBinding
 import com.ozancanguz.universities_turkey.ui.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId==R.id.signoutmenu){
+        if(item.itemId== R.id.signoutmenu){
             binding.progress.visibility=View.VISIBLE
             auth.signOut()
             val intent= Intent(this,LoginActivity::class.java)

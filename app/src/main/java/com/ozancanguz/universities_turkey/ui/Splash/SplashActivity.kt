@@ -14,13 +14,10 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         supportActionBar?.hide()
-//splash ekran için bir Thread oluşturuyoruz
         val background = object : Thread() {
             override fun run() {
                 try {
-                    //threaad 5 sn yani 5000 ms uyusun
                     Thread.sleep(4000)
-                    //intent ile splash ekranından sonra MainActivity ekranı açılsın diyoruz
                     val intent = Intent(this@SplashActivity, LoginActivity::class.java)
                     startActivity(intent)
 
