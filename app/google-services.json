@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "48833819370",
+    "project_id": "university-turkey",
+    "storage_bucket": "university-turkey.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48833819370:android:7e6681e8ad0559f5339d93",
+        "android_client_info": {
+          "package_name": "com.ozancanguz.universities_turkey"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "48833819370-8l6398p8mofv6gd685ntpkv8bic5au94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANT4Es4oDIL9kiW6UzRyG5tNRtkxaIfZ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "48833819370-8l6398p8mofv6gd685ntpkv8bic5au94.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
