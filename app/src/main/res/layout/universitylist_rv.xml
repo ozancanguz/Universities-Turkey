@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="410dp"
     android:layout_height="150dp"
-    android:background="@drawable/login"
+    android:background="@color/yellow"
     android:id="@+id/unilistRowLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
