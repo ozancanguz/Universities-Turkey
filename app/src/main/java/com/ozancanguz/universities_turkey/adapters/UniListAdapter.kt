@@ -3,10 +3,12 @@ package com.ozancanguz.universities_turkey.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.ozancanguz.universities_turkey.R
 import com.ozancanguz.universities_turkey.data.model.University
 import com.ozancanguz.universities_turkey.data.model.UniversityItem
+import com.ozancanguz.universities_turkey.ui.fragments.list.ListFragmentDirections
 import kotlinx.android.synthetic.main.universitylist_rv.view.*
 import okhttp3.internal.notify
 
@@ -34,6 +36,12 @@ class UniListAdapter:RecyclerView.Adapter<UniListAdapter.UniViewHolder>() {
         holder.itemView.uninameTv.text=currentUni.name
         holder.itemView.uniImage.setImageResource(R.drawable.uniimage)
 
+
+        holder.itemView.setOnClickListener {
+
+            val direction=ListFragmentDirections.actionListFragmentToDetailsFragment(currentUni)
+            holder.itemView.findNavController().navigate(direction)
+        }
 
 
     }

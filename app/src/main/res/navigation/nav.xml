@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_detailsFragment_to_listFragment"
             app:destination="@id/listFragment" />
+        <argument
+            android:name="currentUni"
+            app:argType="com.ozancanguz.universities_turkey.data.model.UniversityItem" />
     </fragment>
     <fragment
         android:id="@+id/listFragment"
