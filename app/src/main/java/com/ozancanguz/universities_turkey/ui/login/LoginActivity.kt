@@ -14,6 +14,9 @@ import com.google.firebase.ktx.Firebase
 import com.ozancanguz.universities_turkey.MainActivity
 import com.ozancanguz.universities_turkey.R
 import com.ozancanguz.universities_turkey.databinding.ActivityLoginBinding
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
 
 class LoginActivity : AppCompatActivity() {
 

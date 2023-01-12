@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.ozancanguz.universities_turkey.R
 import com.ozancanguz.universities_turkey.databinding.FragmentDetailsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 
 class DetailsFragment : Fragment() {
 
