@@ -35,6 +35,7 @@ class UniListAdapter:RecyclerView.Adapter<UniListAdapter.UniViewHolder>() {
         holder.itemView.uniImage.setImageResource(R.drawable.uniimage)
 
 
+
     }
 
     override fun getItemCount(): Int {

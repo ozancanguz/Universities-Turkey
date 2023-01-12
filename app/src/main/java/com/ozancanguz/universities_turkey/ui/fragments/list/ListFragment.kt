@@ -6,10 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ozancanguz.universities_turkey.R
+import com.ozancanguz.universities_turkey.adapters.UniListAdapter
 import com.ozancanguz.universities_turkey.databinding.FragmentListBinding
 import com.ozancanguz.universities_turkey.viewmodels.ListViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +23,11 @@ class ListFragment : Fragment() {
     private var _binding: FragmentListBinding? = null
 
     private val binding get() = _binding!!
+
     private val listViewModel:ListViewModel by viewModels()
+
+    private val uniListAdapter=UniListAdapter()
+
 
 
 
@@ -31,22 +38,34 @@ class ListFragment : Fragment() {
         _binding = FragmentListBinding.inflate(inflater, container, false)
         val view = binding.root
 
+
+        // update ui
         observeLiveData()
 
-        binding.tv.setOnClickListener {
-            findNavController().navigate(R.id.action_listFragment_to_detailsFragment)
-        }
+        // set up rv
+        setupRv()
+
+
 
         return view
     }
 
+
     private fun observeLiveData() {
         listViewModel.requestApiData()
         listViewModel.universityList.observe(viewLifecycleOwner, Observer {
-            Log.d("listfragment","succes" +it)
+
+            uniListAdapter.setData(it)
+
         })
 
     }
+
+    private fun setupRv() {
+        binding.recyclerView.layoutManager=LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter=uniListAdapter
+    }
+
 
 
 }
