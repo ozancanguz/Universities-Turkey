@@ -9,13 +9,16 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ozancanguz.universities_turkey.R
 import com.ozancanguz.universities_turkey.adapters.UniListAdapter
 import com.ozancanguz.universities_turkey.databinding.FragmentListBinding
+import com.ozancanguz.universities_turkey.util.observeOnce
 import com.ozancanguz.universities_turkey.viewmodels.ListViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ListFragment : Fragment() {
@@ -40,7 +43,10 @@ class ListFragment : Fragment() {
 
 
         // update ui
-        observeLiveData()
+      //  observeLiveData()
+
+        // listfromDb() instead of from api
+        listfromDb()
 
         // set up rv
         setupRv()
@@ -48,6 +54,21 @@ class ListFragment : Fragment() {
 
 
         return view
+    }
+
+    private fun listfromDb() {
+        lifecycleScope.launch {
+            listViewModel.universityEntityList.observeOnce(viewLifecycleOwner, Observer { database ->
+                if(database.isNotEmpty()){
+                    Log.d("viewmodel","database called")
+                    uniListAdapter.setData(database[0].university)
+
+                }else{
+                    Log.d("viewmodel","requested from api")
+                    observeLiveData()
+                }
+            })
+        }
     }
 
 
@@ -67,6 +88,15 @@ class ListFragment : Fragment() {
         binding.recyclerView.adapter=uniListAdapter
     }
 
+    private fun loadDataFromCache() {
+        lifecycleScope.launch {
+            listViewModel.universityEntityList.observe(viewLifecycleOwner) { database ->
+                if (database.isNotEmpty()) {
+                    uniListAdapter.setData(database[0].university)
+                }
+            }
+        }
+    }
 
 
 }
