@@ -40,6 +40,14 @@ class LoginActivity : AppCompatActivity() {
         login()
 
 
+        // current user
+        val currentUser=auth.currentUser
+        if(currentUser!=null){
+            binding.pbar.visibility=View.VISIBLE
+            val intent=Intent(this,MainActivity::class.java)
+            startActivity(intent)
+            binding.pbar.visibility=View.INVISIBLE
+        }
 
 
 
