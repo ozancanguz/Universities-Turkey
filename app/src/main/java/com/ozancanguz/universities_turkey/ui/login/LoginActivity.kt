@@ -32,13 +32,44 @@ class LoginActivity : AppCompatActivity() {
         // Initialize Firebase Auth
         auth = Firebase.auth
 
+
+        // user sign up
         register()
 
+        // user login
+        login()
 
 
 
 
 
+
+
+    }
+
+    private fun login() {
+        binding.signInBtn.setOnClickListener {
+            val email = binding.emailET.text.toString()
+            val password = binding.passwordET.text.toString()
+            binding.pbar.visibility= View.VISIBLE
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this,"E-mail or password empty",Toast.LENGTH_LONG).show()
+                binding.pbar.visibility= View.INVISIBLE
+            } else {
+
+                auth.signInWithEmailAndPassword(email, password).addOnSuccessListener {
+
+                    val intent= Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    binding.pbar.visibility= View.INVISIBLE
+
+                }.addOnFailureListener {
+                    Toast.makeText(this, it.localizedMessage, Toast.LENGTH_LONG).show()
+                }
+
+
+            }
+        }
     }
 
     private fun register() {
@@ -49,6 +80,7 @@ class LoginActivity : AppCompatActivity() {
 
             if (email.isEmpty() || password.isEmpty()) {
              Toast.makeText(this,"E-mail or password empty",Toast.LENGTH_LONG).show()
+                binding.pbar.visibility= View.INVISIBLE
             } else {
 
                 auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener {
