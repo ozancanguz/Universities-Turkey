@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.ozancanguz.universities_turkey.databinding.ActivityLoginBinding
 import com.ozancanguz.universities_turkey.databinding.ActivityMainBinding
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
