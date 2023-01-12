@@ -52,10 +52,11 @@ class ListFragment : Fragment() {
 
 
     private fun observeLiveData() {
+        binding.progressbarList.visibility=View.VISIBLE
         listViewModel.requestApiData()
         listViewModel.universityList.observe(viewLifecycleOwner, Observer {
-
             uniListAdapter.setData(it)
+            binding.progressbarList.visibility=View.INVISIBLE
 
         })
 
