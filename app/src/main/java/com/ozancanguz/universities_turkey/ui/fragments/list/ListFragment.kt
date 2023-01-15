@@ -20,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ListFragment : Fragment() {
+class ListFragment : Fragment(),SearchView.OnQueryTextListener {
 
     private var _binding: FragmentListBinding? = null
 
@@ -102,9 +102,21 @@ class ListFragment : Fragment() {
     // show menu
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.searchmenu,menu)
-        super.onCreateOptionsMenu(menu, inflater)
+     //   super.onCreateOptionsMenu(menu, inflater)
+        val search = menu.findItem(R.id.menu_search)
+        val searchView = search.actionView as? SearchView
+        searchView?.isSubmitButtonEnabled = true
+        searchView?.setOnQueryTextListener(this)
 
     }
+    override fun onQueryTextSubmit(p0: String?): Boolean {
+        return true
+    }
+
+    override fun onQueryTextChange(p0: String?): Boolean {
+        return true
+    }
+
 
 
 }
