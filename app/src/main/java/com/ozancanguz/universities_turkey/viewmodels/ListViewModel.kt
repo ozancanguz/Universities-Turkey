@@ -21,6 +21,9 @@ class ListViewModel@Inject constructor(val repository: Repository,application: A
         var universityList=MutableLiveData<University>()
         var job: Job?=null
 
+    // search fun
+    var searchedRecipesResponse:MutableLiveData<University> = MutableLiveData()
+
 
     // ------------ROOM
     var universityEntityList:LiveData<List<UniversityEntity>> = repository.local.listAllUniversities().asLiveData()
@@ -54,6 +57,20 @@ class ListViewModel@Inject constructor(val repository: Repository,application: A
 
             }else{
                 Log.d("listviewmodel","no data"+response.body())
+            }
+
+        }
+    }
+
+
+    // search in request data
+    fun searchRequestData(searchQuery: Map<String, String>){
+        job=CoroutineScope(Dispatchers.IO).launch {
+
+          val response=repository.remote.searchUniversity(searchQuery)
+            if(response.isSuccessful){
+
+                searchedRecipesResponse.postValue(response.body())
             }
 
         }
