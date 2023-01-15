@@ -12,4 +12,9 @@ class RemoteDataSource@Inject constructor(private val universityApi: UniversityA
         return universityApi.getUniversityList()
     }
 
+
+    suspend fun searchUniversity(searchQuery: Map<String, String>):Response<University>{
+        return universityApi.SearchUniversity(searchQuery)
+    }
+
 }
