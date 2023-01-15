@@ -11,4 +11,6 @@ interface UniversityApi {
     suspend fun getUniversityList(): Response<University>
 
 
+
+
 }

@@ -2,11 +2,10 @@ package com.ozancanguz.universities_turkey.ui.fragments.list
 
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -40,6 +39,7 @@ class ListFragment : Fragment() {
     ): View? {
         _binding = FragmentListBinding.inflate(inflater, container, false)
         val view = binding.root
+        setHasOptionsMenu(true)
 
 
         // update ui
@@ -96,6 +96,14 @@ class ListFragment : Fragment() {
                 }
             }
         }
+    }
+
+
+    // show menu
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.searchmenu,menu)
+        super.onCreateOptionsMenu(menu, inflater)
+
     }
 
 
