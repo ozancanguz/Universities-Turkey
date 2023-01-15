@@ -4,21 +4,22 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.LinearLayout
-import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ozancanguz.universities_turkey.R
 import com.ozancanguz.universities_turkey.adapters.UniListAdapter
 import com.ozancanguz.universities_turkey.databinding.FragmentListBinding
+import com.ozancanguz.universities_turkey.util.Constants.Companion.QUERY_SEARCH
 import com.ozancanguz.universities_turkey.util.observeOnce
 import com.ozancanguz.universities_turkey.viewmodels.ListViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class ListFragment : Fragment(),SearchView.OnQueryTextListener {
 
@@ -53,6 +54,7 @@ class ListFragment : Fragment(),SearchView.OnQueryTextListener {
 
 
 
+
         return view
     }
 
@@ -62,7 +64,6 @@ class ListFragment : Fragment(),SearchView.OnQueryTextListener {
                 if(database.isNotEmpty()){
                     Log.d("viewmodel","database called")
                     uniListAdapter.setData(database[0].university)
-
                 }else{
                     Log.d("viewmodel","requested from api")
                     observeLiveData()
@@ -102,19 +103,40 @@ class ListFragment : Fragment(),SearchView.OnQueryTextListener {
     // show menu
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.searchmenu,menu)
-     //   super.onCreateOptionsMenu(menu, inflater)
+        super.onCreateOptionsMenu(menu, inflater)
         val search = menu.findItem(R.id.menu_search)
         val searchView = search.actionView as? SearchView
         searchView?.isSubmitButtonEnabled = true
         searchView?.setOnQueryTextListener(this)
 
     }
-    override fun onQueryTextSubmit(p0: String?): Boolean {
+    override fun onQueryTextSubmit(query: String?): Boolean {
+
+        if(query != null){
+            searchApiData(query)
+        }
+        return true
+    }
+    override fun onQueryTextChange(p0: String?): Boolean {
         return true
     }
 
-    override fun onQueryTextChange(p0: String?): Boolean {
-        return true
+    private fun searchApiData(searchQuery: String){
+
+        listViewModel.searchRequestData(applySearchQuery(searchQuery))
+        listViewModel.searchedRecipesResponse.observe(viewLifecycleOwner, Observer {response ->
+
+            uniListAdapter.setData(response)
+
+
+        })
+    }
+
+    private fun applySearchQuery(searchQuery:String):HashMap<String,String>{
+        val queries: HashMap<String, String> = HashMap()
+        queries[QUERY_SEARCH]=searchQuery
+
+        return queries
     }
 
 

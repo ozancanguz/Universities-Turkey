@@ -1,5 +1,6 @@
 package com.ozancanguz.universities_turkey.viewmodels
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
@@ -22,7 +23,8 @@ class ListViewModel@Inject constructor(val repository: Repository,application: A
         var job: Job?=null
 
     // search fun
-    var searchedRecipesResponse:MutableLiveData<University> = MutableLiveData()
+    var searchedRecipesResponse=MutableLiveData<University>()
+    var job2:Job?=null
 
 
     // ------------ROOM
@@ -64,13 +66,17 @@ class ListViewModel@Inject constructor(val repository: Repository,application: A
 
 
     // search in request data
+    @SuppressLint("SuspiciousIndentation")
     fun searchRequestData(searchQuery: Map<String, String>){
-        job=CoroutineScope(Dispatchers.IO).launch {
+        job2=CoroutineScope(Dispatchers.IO).launch {
 
-          val response=repository.remote.searchUniversity(searchQuery)
-            if(response.isSuccessful){
+          val response2=repository.remote.searchUniversity(searchQuery)
 
-                searchedRecipesResponse.postValue(response.body())
+            if(response2.isSuccessful){
+                searchedRecipesResponse.postValue(response2.body())
+            }
+            else{
+                Log.d("listviewmodel","Search fun not working")
             }
 
         }
